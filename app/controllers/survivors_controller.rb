@@ -3,7 +3,6 @@ class SurvivorsController < ApplicationController
 
   def index
     @survivors = Requester.get("#{ENV['API']}/survivors")
-    render json: @survivors
   end
 
   def show
