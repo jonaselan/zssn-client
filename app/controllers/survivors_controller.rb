@@ -2,10 +2,10 @@ class SurvivorsController < ApplicationController
   before_action :set_survivor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @survivors = Requester.get("#{ENV['API']}/survivors")
   end
 
   def show
+    flash[:notice] = "Welcome to ZSSN #{@survivor['name']}!"
   end
 
   def new
@@ -52,7 +52,7 @@ class SurvivorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survivor
-      @survivor = Survivor.get("#{ENV['API']}/survivors/#{params[:id]}")
+      @survivor = Requester.get("#{ENV['API']}/survivors/#{params[:id]}")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
