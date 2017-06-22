@@ -1,4 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@import "./layout/application";
+
 @import "./home/index";
+
+@import "./survivors/show"

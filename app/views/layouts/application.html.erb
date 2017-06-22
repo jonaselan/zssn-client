@@ -1,14 +1,64 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ZssnClient</title>
+    <title>ZSSN (Zombe Survivor Social Network)</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <% unless @survivors_index %>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ZSSN</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Survivors</a></li>
+            <li><a href="#">Reports</a></li>
+            <!-- TODO: history of location and trades -->
+            <li><a href="#">History</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"> Exit</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+      <%= yield %>
+    <% else %>
+      <div class="container">
+        <div class="body-template">
+          <h1> How are you? </h1>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @survivors_index.each do |survivor| %>
+                  <tr class='link-to-survivor' data-href='survivors/<%=survivor['id']%>'>
+                    <td><%= survivor['id'] %></td>
+                    <td><%= survivor['name'] %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>

@@ -5,7 +5,8 @@ class SurvivorsController < ApplicationController
   end
 
   def show
-    flash[:notice] = "Welcome to ZSSN #{@survivor['name']}!"
+    cookies[:id] = @survivor['id']
+    cookies[:name] = @survivor['name']
   end
 
   def new
