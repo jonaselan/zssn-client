@@ -22,10 +22,8 @@ class SurvivorsController < ApplicationController
     respond_to do |format|
       if @survivor.save
         format.html { redirect_to @survivor, notice: 'Survivor was successfully created.' }
-        format.json { render :show, status: :created, location: @survivor }
       else
         format.html { render :new }
-        format.json { render json: @survivor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -34,10 +32,8 @@ class SurvivorsController < ApplicationController
     respond_to do |format|
       if @survivor.update(survivor_params)
         format.html { redirect_to @survivor, notice: 'Survivor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @survivor }
       else
         format.html { render :edit }
-        format.json { render json: @survivor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,7 +49,7 @@ class SurvivorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survivor
-      @survivor = Requester.get("#{ENV['API']}/survivors/#{params[:id]}")
+      @survivor = Requester.get("survivors/#{params[:id]}")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

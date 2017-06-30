@@ -1,11 +1,11 @@
 class Requester
   class << self
     def get(source)
-      to_json(RestClient.get(source, {:accept => :json}))
+      to_json(RestClient.get("#{ENV['API']}/" + source, { accept: :json }))
     end
 
     def post(source, params)
-      RestClient.post(source, params)
+      RestClient.post("#{ENV['API']}/" + source, params)
     end
 
     private

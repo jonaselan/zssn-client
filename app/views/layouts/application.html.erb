@@ -38,25 +38,29 @@
     <% else %>
       <div class="container">
         <div class="body-template">
-          <h1> How are you? </h1>
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @survivors_index.each do |survivor| %>
-                  <tr class='link-to-survivor' data-href='survivors/<%=survivor['id']%>'>
-                    <td><%= survivor['id'] %></td>
-                    <td><%= survivor['name'] %></td>
+          <% unless @survivors_index.empty? %>
+            <h1> How are you? </h1>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  <% @survivors_index.each do |survivor| %>
+                    <tr class='link-to-survivor' data-href='survivors/<%=survivor['id']%>' id="survivor-<%=survivor['id']%>">
+                      <td><%= survivor['id'] %></td>
+                      <td><%= survivor['name'] %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <h1>No survivor exist. Are they all dead? :(</h1>
+          <% end %>
         </div>
       </div>
     <% end %>
