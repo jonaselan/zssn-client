@@ -12,6 +12,8 @@ describe 'survivor page content' do
         name: "Zezinho",
         age: 10,
         gender: 'M',
+        latitude: 222,
+        longitude: 111,
         created_at: '2017-05-19T12:10:12.544Z'
       }.as_json
     }
@@ -29,6 +31,15 @@ describe 'survivor page content' do
       click_on 'Edit your location'
       expect(page).to have_selector :css, 'div#edit-location-modal.fade.in'
     end
-    
+    context 'The location information must be in the modal' do
+      it "latitude" do
+        visit '/survivors/1'
+        expect(find_field(id: 'latitude').value).to eq '222'
+      end
+      it "longitude" do
+        visit '/survivors/1'
+        expect(find_field(id: 'longitude').value).to eq '111'
+      end
+    end
   end
 end

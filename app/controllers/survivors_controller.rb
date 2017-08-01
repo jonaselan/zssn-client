@@ -29,13 +29,13 @@ class SurvivorsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @survivor.update(survivor_params)
-        format.html { redirect_to @survivor, notice: 'Survivor was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if Requester.put("survivors/#{params[:id]}", survivor_params)
+      flash[:success] = "Survivor was successfully updated."
+    else
+      flash[:danger] = "Error while trying to edit survivor"
     end
+
+    redirect_to survivor_path params[:id]
   end
 
   def destroy
@@ -54,6 +54,6 @@ class SurvivorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survivor_params
-      params.fetch(:survivor, {})
+      params.permit(:latitude, :longitude)
     end
 end

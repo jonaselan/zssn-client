@@ -5,7 +5,11 @@ class Requester
     end
 
     def post(source, params)
-      RestClient.post("#{ENV['API']}/" + source, params)
+      RestClient.post("#{ENV['API']}/" + source, params.as_json)
+    end
+
+    def put(source, params)
+      RestClient.put("#{ENV['API']}/" + source, params.as_json)
     end
 
     private

@@ -1,3 +1,5 @@
+<%= flash_message %>
+
 <div class="container-center">
   <div class="row">
     <div class="col-md-4">
@@ -49,9 +51,9 @@
       <div class="modal-body">
         <%= form_tag("/survivors/#{@survivor['id']}", method: :put, class: 'form-group') do%>
           <label for="lat">latitude</label>
-          <input type="number" class="form-control" name="lat">
+          <input type="number" class="form-control" name="latitude" id="latitude" value="<%= @survivor['latitude'] %>">
           <label for="long">longitude</label> <br>
-          <input type="number" class="form-control" name="long">
+          <input type="number" class="form-control" name="longitude" id="longitude" value="<%= @survivor['longitude'] %>">
           <div class="modal-footer">
             <input type="submit" class="btn btn-default" value="Save">
           </div>
